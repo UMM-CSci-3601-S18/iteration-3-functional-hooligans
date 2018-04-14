@@ -1,4 +1,5 @@
 import {Component, Inject} from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
     selector: 'app-response.component',
@@ -6,6 +7,8 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
     styleUrls: ['./response.component.css'],
 })
 export class ResponseComponent {
+    public selectedEmotion = "none";
+    public sanitzer;
 
     // links is an array of different responses we are using when you select an emoji in our home page
 
@@ -29,23 +32,27 @@ export class ResponseComponent {
 
 
     constructor(
-        public dialogRef: MatDialogRef<ResponseComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { response: number }) {
+        public dialogRef: MatDialogRef<ResponseComponent>, private sanitizer: DomSanitizer,
+        @Inject(MAT_DIALOG_DATA) public data: { response: number } ) {
     }
+
+
 
     // getLink is the magic function that randomly chooses one of the links in the array
     // that we added to the responses.component file to make sure the links are not
     // repetitive and random everytime
 
-    getLink() : void {
-        var index = Math.floor(Math.random() * this.links.length);
-        window.open(this.links[index]);
-
-        //Make sure dialog box closes after opening link
-        this.onNoClick()
-    }
+    // getLink() : string {
+    //     var response
+    //     var index = Math.floor(Math.random() * this.links.length);
+    //   response = this.links[index];
+    //     return this.sanitizer.bypassSecurityTrustUrl(response);
+    //
+    // }
 
     onNoClick(): void {
         this.dialogRef.close();
     }
+
+
 }

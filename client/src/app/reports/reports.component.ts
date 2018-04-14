@@ -27,7 +27,8 @@ export class ReportsComponent implements OnInit {
         {value: 'down', viewValue:3},
         {value: 'meh', viewValue:4},
         {value: 'happy', viewValue:5},
-        {value: 'radiant', viewValue:6},
+        {value: 'Radient', viewValue:6}
+
     ]
 
     // Inject the EmojiListService into this component.
@@ -50,7 +51,7 @@ export class ReportsComponent implements OnInit {
         }
 
         // Filter by mood
-        if (searchMood != null) {
+        if (searchMood != null && searchMood != '') {
             this.filteredEmojis = this.filteredEmojis.filter(emoji => {
                 return !searchMood || emoji.mood == searchMood;
             });
